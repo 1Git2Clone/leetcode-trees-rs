@@ -7,6 +7,7 @@
 //! ## Installation
 //!
 //! These are the two ways to can add this library to your project:
+//!
 //! Number 1 - Via the `Cargo.toml` file by adding this;
 //!
 //! ```toml
@@ -35,12 +36,11 @@
 //! ```
 //!
 //! Assuming there's a LeetCode submittion for it. All the solutions are managed on the GitHub page
-//! of this libray - [`solutions`].
+//! of this libray.
 //!
 //!
 //!
 //! [`prelude`]: crate::prelude
-//! [solutions]: https://github.com/1Kill2Steal/leetcode-trees-rs/tree/main/solutions
 //! [`TreeNode`]: crate::utils::TreeNode
 
 pub use crate::prelude::*;
