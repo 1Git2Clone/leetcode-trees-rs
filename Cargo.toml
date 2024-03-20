@@ -1,10 +1,17 @@
-workspace = { members = [ "solutions/lc0_general_nodes_template","solutions/lc100_is_same_tree"] }
 [package]
 name = "leetcode-trees-rs"
 version = "0.1.0"
+description = "A Rust library for Tree Node LeetCode problems."
+keywords = ["leetcode", "library"]
+homepage = "https://github.com/1kill2steal/leetcode-trees-rs"
+repository = "https://github.com/1kill2steal/leetcode-trees-rs"
+license = "MIT"
 edition = "2021"
+readme = "README.md"
+include = ["src/**/*", "LICENSE.md", "README.md"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+workspace = { members = ["solutions/*"] }
 
 [dependencies]
 thiserror = "1.0.58"
