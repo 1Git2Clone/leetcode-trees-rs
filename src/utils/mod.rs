@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::{cell::RefCell, rc::Rc};
 
 /// The TreeNode signature is entirely 1:1 with LeetCode with additional optional features like serde.
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct TreeNode {
     /// This uses normal i32 values that can be serialized and deserialized using serde if wanted.
@@ -13,6 +13,17 @@ pub struct TreeNode {
     pub left: Option<Rc<RefCell<TreeNode>>>,
     #[cfg_attr(feature = "serde", serde(skip))]
     pub right: Option<Rc<RefCell<TreeNode>>>,
+}
+
+impl TreeNode {
+    #[inline]
+    pub fn new(val: i32) -> Self {
+        TreeNode {
+            val,
+            left: None,
+            right: None,
+        }
+    }
 }
 
 /// This test DOESN'T implement the Send and Sync traits. That's because the program as a whole
