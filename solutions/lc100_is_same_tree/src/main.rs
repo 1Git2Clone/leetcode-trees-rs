@@ -43,18 +43,38 @@ impl Solution {
 
 // #region Test NodeTree functions
 
-fn test_node_root_with_2_branches() -> TreeNode {
+fn test_node_root_with_two_branches() -> TreeNode {
+    let left_child_two = TreeNode::new(9);
+    let left_child_one = TreeNode {
+        val: 69,
+        left: Some(Rc::from(RefCell::from(left_child_two))),
+        right: None,
+    };
     let right_child_two = TreeNode::new(6);
     let right_child_one = TreeNode {
         val: 6,
         left: None,
         right: Some(Rc::from(RefCell::from(right_child_two))),
     };
+    TreeNode {
+        val: 42,
+        left: Some(Rc::from(RefCell::from(left_child_one))),
+        right: Some(Rc::from(RefCell::from(right_child_one))),
+    }
+}
+
+fn second_test_node_root_with_two_branches() -> TreeNode {
     let left_child_two = TreeNode::new(9);
     let left_child_one = TreeNode {
-        val: 69,
+        val: 70, // This is the only difference between the two.
         left: Some(Rc::from(RefCell::from(left_child_two))),
         right: None,
+    };
+    let right_child_two = TreeNode::new(6);
+    let right_child_one = TreeNode {
+        val: 6,
+        left: None,
+        right: Some(Rc::from(RefCell::from(right_child_two))),
     };
     TreeNode {
         val: 42,
@@ -71,17 +91,17 @@ fn main() -> Result<()> {
     println!(
         "This first test should give - TRUE\nResult (method 1): {}\nResult (method 2): {}",
         Solution::is_same_tree_one(
-            Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
-            Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
         ),
         Solution::is_same_tree_two(
-            Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
-            Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
         ),
     );
     assert_eq!(
-        test_node_root_with_2_branches(),
-        test_node_root_with_2_branches(),
+        test_node_root_with_two_branches(),
+        test_node_root_with_two_branches(),
     );
 
     println!(
@@ -93,16 +113,16 @@ fn main() -> Result<()> {
     println!(
         "This third test should give - FALSE\nResult (method 1): {}\nResult (method 2): {}",
         Solution::is_same_tree_one(
-            Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
             None,
         ),
         Solution::is_same_tree_two(
-            Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
             None,
         )
     );
     assert_ne!(
-        Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
+        Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
         None,
     );
 
@@ -110,16 +130,29 @@ fn main() -> Result<()> {
         "This fourth test should give - FALSE\nResult (method 1): {}\nResult (method 2): {}",
         Solution::is_same_tree_one(
             None,
-            Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
         ),
         Solution::is_same_tree_two(
             None,
-            Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
         )
     );
     assert_ne!(
         None,
-        Some(Rc::from(RefCell::from(test_node_root_with_2_branches()))),
+        Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
+    );
+
+    assert_ne!(
+        Solution::is_same_tree_one(
+            Some(Rc::from(RefCell::from(
+                second_test_node_root_with_two_branches()
+            ))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches())))
+        ),
+        Solution::is_same_tree_two(
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches()))),
+            Some(Rc::from(RefCell::from(test_node_root_with_two_branches())))
+        )
     );
 
     Ok(())
