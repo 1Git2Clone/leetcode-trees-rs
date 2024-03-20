@@ -43,6 +43,26 @@ command = "cargo"
 args = ["make", "--cwd", "${SOLUTIONS_PATH}/${@}", "solutions_run_release"]
 
 
+[tasks.0]
+alias = "run_0"
+
+[tasks.run_0]
+command = "cargo"
+args = ["make", "run_solution_release", "lc0_general_nodes_template"]
+
+[tasks.build_0]
+command = "cargo"
+args = ["make", "build_solution_release", "lc0_general_nodes_template"]
+
+[tasks.dev_run_0]
+command = "cargo"
+args = ["make", "run_solution", "lc0_general_nodes_template"]
+
+[tasks.dev_build_0]
+command = "cargo"
+args = ["make", "build_solution", "lc0_general_nodes_template"]
+
+
 [tasks.100]
 alias = "run_100"
 

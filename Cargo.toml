@@ -1,4 +1,4 @@
-workspace = { members = ["solutions/lc100_is_same_tree"] }
+workspace = { members = [ "solutions/lc0_general_nodes_template","solutions/lc100_is_same_tree"] }
 [package]
 name = "leetcode-trees-rs"
 version = "0.1.0"
