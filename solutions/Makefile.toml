@@ -1,7 +1,7 @@
 extend = "../Makefile.toml"
 
 [env]
-solutionS_PATH = "../../solutions"
+SOLUTIONS_PATH = "../solutions"
 
 [tasks.build_solution]
 command = "cargo"
