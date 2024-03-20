@@ -1,0 +1,63 @@
+[config]
+default_to_workspace = false
+
+[env]
+SOLUTIONS_PATH = { value = "./solutions", condition = { env_not_set = [
+  "SOLUTIONS_PATH",
+] } }
+
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+[tasks.build_release]
+extend = "build"
+args = ["build", "--release"]
+
+[tasks.build_solution]
+command = "cargo"
+args = ["make", "--cwd", "${SOLUTIONS_PATH}/${@}", "solutions_build"]
+dependencies = ["build"]
+
+[tasks.build_solution_release]
+command = "cargo"
+args = ["make", "--cwd", "${SOLUTIONS_PATH}/${@}", "solutions_build_release"]
+dependencies = ["build_release"]
+
+[tasks.run]
+command = "cargo"
+args = ["run"]
+
+[tasks.run_release]
+extend = "run"
+args = ["run", "--release"]
+dependencies = ["build"]
+
+[tasks.run_solution]
+command = "cargo"
+args = ["make", "--cwd", "${SOLUTIONS_PATH}/${@}", "solutions_run"]
+dependencies = ["build_release"]
+
+[tasks.run_solution_release]
+command = "cargo"
+args = ["make", "--cwd", "${SOLUTIONS_PATH}/${@}", "solutions_run_release"]
+
+
+[tasks.100]
+alias = "run_100"
+
+[tasks.run_100]
+command = "cargo"
+args = ["make", "run_solution_release", "lc100_is_same_tree"]
+
+[tasks.build_100]
+command = "cargo"
+args = ["make", "build_solution_release", "lc100_is_same_tree"]
+
+[tasks.dev_run_100]
+command = "cargo"
+args = ["make", "run_solution", "lc100_is_same_tree"]
+
+[tasks.dev_build_100]
+command = "cargo"
+args = ["make", "build_solution", "lc100_is_same_tree"]

@@ -1,0 +1,24 @@
+extend = "../Makefile.toml"
+
+[env]
+solutionS_PATH = "../../solutions"
+
+[tasks.build_solution]
+command = "cargo"
+args = ["make", "--cwd", "./${@}", "solutions_build"]
+dependencies = ["build"]
+
+[tasks.build_solution_release]
+command = "cargo"
+args = ["make", "--cwd", "./${@}", "solutions_build_release"]
+dependencies = ["build_release"]
+
+[tasks.run_solution]
+command = "cargo"
+args = ["make", "--cwd", "./${@}", "solutions_run"]
+dependencies = ["build"]
+
+[tasks.run_solution_release]
+command = "cargo"
+args = ["make", "--cwd", "./${@}", "solutions_run_release"]
+dependencies = ["build_release"]

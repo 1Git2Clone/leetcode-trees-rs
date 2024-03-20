@@ -1,0 +1,26 @@
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
+use std::{cell::RefCell, rc::Rc};
+
+/// The TreeNode signature is entirely 1:1 with LeetCode with additional optional features like serde.
+#[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub struct TreeNode {
+    /// This uses normal i32 values that can be serialized and deserialized using serde if wanted.
+    pub val: i32,
+
+    #[cfg_attr(feature = "serde", serde(skip))]
+    pub left: Option<Rc<RefCell<TreeNode>>>,
+    #[cfg_attr(feature = "serde", serde(skip))]
+    pub right: Option<Rc<RefCell<TreeNode>>>,
+}
+
+/// This test DOESN'T implement the Send and Sync traits. That's because the program as a whole
+/// isn't made to be async. It's meant to just be a basic CLI app that you can check your leetcode
+/// submitions in. Send and Sync both require Arc which breaks the leetcode TreeNode signature
+/// Option<Rc<Refcell<TreeNode>>>.
+fn _is_normal<T: Sized + Unpin>() {}
+#[test]
+fn normal_types() {
+    _is_normal::<TreeNode>();
+}
