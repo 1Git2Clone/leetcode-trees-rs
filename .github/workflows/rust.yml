@@ -17,9 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: lc0
-      run: cargo make 0
+      run: cargo check -p lc0_general_nodes_template
     - name: lc100
-      run: cargo make 100
+      run: cargo check -p lc100_is_same_tree
     - name: Build
       run: cargo build --verbose
     - name: Run tests
