@@ -19,7 +19,7 @@ impl Solution {
 
 fn main() -> Result<()> {
     // Your testing here . . .
-    // Alternatively, you can just use functions with #[(test)] definitions.
+    // Alternatively, you can just use functions with #[test] definitions.
 
     Ok(())
 }
