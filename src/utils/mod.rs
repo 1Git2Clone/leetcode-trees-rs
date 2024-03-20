@@ -10,13 +10,13 @@ pub struct TreeNode {
     pub val: i32,
 
     /// An optional smart pointer contained within a reference cell. This provides very useful
-    /// functionality like internal mutability. The poiter can be represented as the left child
+    /// functionality like interior mutability. The poiter can be represented as the left child
     /// node of a binary tree.
     #[cfg_attr(feature = "serde", serde(skip))]
     pub left: Option<Rc<RefCell<TreeNode>>>,
 
     /// An optional smart pointer contained within a reference cell. This provides very useful
-    /// functionality like internal mutability. The poiter can be represented as the right child
+    /// functionality like interior mutability. The poiter can be represented as the right child
     /// node of a binary tree.
     #[cfg_attr(feature = "serde", serde(skip))]
     pub right: Option<Rc<RefCell<TreeNode>>>,
