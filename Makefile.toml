@@ -81,3 +81,23 @@ args = ["make", "run_solution", "lc100_is_same_tree"]
 [tasks.dev_build_100]
 command = "cargo"
 args = ["make", "build_solution", "lc100_is_same_tree"]
+
+
+[tasks.101]
+alias = "run_101"
+
+[tasks.run_101]
+command = "cargo"
+args = ["make", "run_solution_release", "lc101_symmetric_tree"]
+
+[tasks.build_101]
+command = "cargo"
+args = ["make", "build_solution_release", "lc101_symmetric_tree"]
+
+[tasks.dev_run_101]
+command = "cargo"
+args = ["make", "run_solution", "lc101_symmetric_tree"]
+
+[tasks.dev_build_101]
+command = "cargo"
+args = ["make", "build_solution", "lc101_symmetric_tree"]
