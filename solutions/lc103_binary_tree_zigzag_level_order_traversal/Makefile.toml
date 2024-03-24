@@ -1,0 +1,13 @@
+extend = "../../Makefile.toml"
+
+[tasks.solutions_build]
+alias = "build"
+
+[tasks.solutions_build_release]
+alias = "build_release"
+
+[tasks.solutions_run]
+alias = "run"
+
+[tasks.solutions_run_release]
+alias = "run_release"

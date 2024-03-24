@@ -101,3 +101,38 @@ args = ["make", "run_solution", "lc101_symmetric_tree"]
 [tasks.dev_build_101]
 command = "cargo"
 args = ["make", "build_solution", "lc101_symmetric_tree"]
+
+[tasks.103]
+alias = "run_103"
+
+[tasks.run_103]
+command = "cargo"
+args = [
+  "make",
+  "run_solution_release",
+  "lc103_binary_tree_zigzag_level_order_traversal",
+]
+
+[tasks.build_103]
+command = "cargo"
+args = [
+  "make",
+  "build_solution_release",
+  "lc103_binary_tree_zigzag_level_order_traversal",
+]
+
+[tasks.dev_run_103]
+command = "cargo"
+args = [
+  "make",
+  "run_solution",
+  "lc103_binary_tree_zigzag_level_order_traversal",
+]
+
+[tasks.dev_build_103]
+command = "cargo"
+args = [
+  "make",
+  "build_solution",
+  "lc103_binary_tree_zigzag_level_order_traversal",
+]
