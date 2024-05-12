@@ -43,9 +43,23 @@
 //! [`prelude`]: crate::prelude
 //! [`TreeNode`]: crate::utils::TreeNode
 
+#![warn(missing_docs)]
+
+/// The module that contains the error type.
 pub mod error;
+
+/// The module that contains all the useful macros.
+pub mod macros;
+
+/// Contains re-exports for all the important structs.
 pub mod prelude;
+
+#[allow(missing_docs)]
+#[cfg(test)]
 pub mod tests;
+
+/// Contains the structs and macro re-exports that you can use in creating LeetCode solutions
+/// related to binary trees.
 pub mod utils;
 
 pub use crate::prelude::*;
