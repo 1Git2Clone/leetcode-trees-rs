@@ -2,7 +2,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use crate::prelude::*;
-use crate::utils::TreeNode;
+use crate::utils::{symmetric_tree, TreeNode};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Utility
@@ -15,16 +15,6 @@ fn rc_cell_node(val: i32) -> Rc<RefCell<TreeNode>> {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Preset nodes
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-fn symmetric_tree(val: i32) -> TreeNode {
-    let left_node = TreeNode::new(val);
-    let right_node = TreeNode::new(val);
-    TreeNode {
-        val: 100,
-        left: Some(Rc::from(RefCell::from(left_node))),
-        right: Some(Rc::from(RefCell::from(right_node))),
-    }
-}
 
 fn asymmetric_values_tree(left_val: i32, right_val: i32) -> TreeNode {
     let left_node = TreeNode::new(left_val);
@@ -57,15 +47,10 @@ fn asymmetric_tree_no_left(val: i32) -> TreeNode {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 fn test_symmetric_tree() -> Result<()> {
-    let left_right_vals = 50;
-
-    let symmetric_tree = symmetric_tree(left_right_vals);
+    let symmetric_tree = symmetric_tree!(100, 50, 123, 124, 124, 1, 24, 12, 421, 41, 42, 14, 12, 4);
 
     match (symmetric_tree.left, symmetric_tree.right) {
         (Some(left_node), Some(right_node)) => {
-            assert_eq!(left_node, rc_cell_node(left_right_vals));
-            assert_eq!(right_node, rc_cell_node(left_right_vals));
-
             assert_eq!(left_node, right_node);
         }
         (Some(_), None) => {

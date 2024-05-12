@@ -1,13 +1,9 @@
 use crate::prelude::*;
-use crate::utils::ListNode;
+use crate::utils::{list_node, ListNode};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Utility
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-fn some_box_node(val: i32) -> Option<Box<ListNode>> {
-    Some(Box::from(ListNode::new(val)))
-}
 
 fn traverse_node(list_node: &mut Box<ListNode>, items: Vec<i32>) -> Result<()> {
     if items.is_empty() {
@@ -50,31 +46,6 @@ fn traverse_node(list_node: &mut Box<ListNode>, items: Vec<i32>) -> Result<()> {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// Preset nodes
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-fn one_item_node(val: i32) -> ListNode {
-    ListNode::new(val)
-}
-
-fn two_items_node(val: i32, val2: Option<i32>) -> ListNode {
-    ListNode {
-        val,
-        next: some_box_node(val2.unwrap_or(val)),
-    }
-}
-
-fn three_items_node(val: i32, val2: Option<i32>, val3: Option<i32>) -> ListNode {
-    ListNode {
-        val,
-        next: Some(Box::from(ListNode {
-            val: val2.unwrap_or(val),
-            next: some_box_node(val3.unwrap_or(val2.unwrap_or(val))),
-        })),
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 // Tests with the preset nodes
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -82,27 +53,24 @@ fn correct_traversals() -> Result<()> {
     // Three items
 
     let three_items_values = vec![1, 2, 3];
-    let mut three_items_node = Box::from(three_items_node(
+    let three_items_node = list_node!(
         three_items_values[0],
-        Some(three_items_values[1]),
-        Some(three_items_values[2]),
-    ));
-    traverse_node(&mut three_items_node, three_items_values)?;
+        three_items_values[1],
+        three_items_values[2]
+    );
+    traverse_node(&mut Box::from(three_items_node), three_items_values)?;
 
     // Two items
 
     let two_items_values = vec![1, 2];
-    let mut two_items_node = Box::from(two_items_node(
-        two_items_values[0],
-        Some(two_items_values[1]),
-    ));
-    traverse_node(&mut two_items_node, two_items_values)?;
+    let two_items_node = list_node!(two_items_values[0], two_items_values[1]);
+    traverse_node(&mut Box::from(two_items_node), two_items_values)?;
 
     // One item
 
     let one_item_value = vec![1];
-    let mut one_item_node = Box::from(one_item_node(one_item_value[0]));
-    traverse_node(&mut one_item_node, one_item_value)?;
+    let one_item_node = list_node!(one_item_value[0]);
+    traverse_node(&mut Box::from(one_item_node), one_item_value)?;
 
     Ok(())
 }

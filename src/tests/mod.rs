@@ -1,10 +1,5 @@
-#[cfg(test)]
 mod linked_lists;
-
-#[cfg(test)]
 mod trees;
-
-#[cfg(test)]
 mod type_tests {
     /// This test DOESN'T implement the Send and Sync traits. That's because the program as a whole
     /// isn't made to be async. It's meant to just be a basic CLI app that you can check your leetcode
