@@ -20,7 +20,7 @@
 ///
 /// ```rust
 /// use std::boxed::Box;
-/// use leetcode_trees_rs::utils::ListNode;
+/// use leetcode_trees_rs::utils::{list_node, ListNode};
 ///
 /// let node = ListNode {
 ///     val: 1,
@@ -32,6 +32,7 @@
 ///         }))
 ///     }))
 /// };
+/// assert_eq!(node, list_node!(1, 2, 3, 4));
 /// ```
 #[macro_export]
 macro_rules! list_node {
@@ -108,9 +109,9 @@ macro_rules! tree {
 /// ```rust
 /// use std::{rc::Rc, cell::RefCell, boxed::Box};
 ///
-/// use leetcode_trees_rs::utils::TreeNode;
+/// use leetcode_trees_rs::utils::{symmetric_tree, TreeNode};
 ///
-/// TreeNode {
+/// let node = TreeNode {
 ///     val: 1,
 ///     left: Some(Rc::new(RefCell::new(TreeNode{
 ///         val: 2,
@@ -171,6 +172,7 @@ macro_rules! tree {
 ///         }))),
 ///     }))),
 /// };
+/// assert_eq!(node, symmetric_tree!(1, 2, 3, 4));
 /// ```
 /// Now you have a tree that branches all the way through the right side without having anything on
 /// the left.
@@ -221,7 +223,7 @@ macro_rules! symmetric_tree {
 ///
 /// ```rust
 /// use std::{rc::Rc, cell::RefCell};
-/// use leetcode_trees_rs::utils::TreeNode;
+/// use leetcode_trees_rs::utils::{left_tree, TreeNode};
 ///
 /// let left_only_tree = TreeNode {
 ///     val: 1,
@@ -236,6 +238,7 @@ macro_rules! symmetric_tree {
 ///     }))),
 ///     right: None,
 /// };
+/// assert_eq!(left_only_tree, left_tree!(1, 2, 3));
 /// ```
 #[macro_export]
 macro_rules! left_tree {
@@ -277,7 +280,7 @@ macro_rules! left_tree {
 ///
 /// ```rust
 /// use std::{rc::Rc, cell::RefCell};
-/// use leetcode_trees_rs::utils::TreeNode;
+/// use leetcode_trees_rs::utils::{right_tree, TreeNode};
 ///
 /// let right_only_tree = TreeNode {
 ///     val: 1,
@@ -292,6 +295,7 @@ macro_rules! left_tree {
 ///         })))
 ///     })))
 /// };
+/// assert_eq!(right_only_tree, right_tree!(1, 2, 3));
 /// ```
 #[macro_export]
 macro_rules! right_tree {
