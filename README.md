@@ -1,5 +1,12 @@
 # LeetCode Trees in Rust
 
+[![Build Status]][Actions] &emsp; [![Latest Version]][crates.io]
+
+[Build Status]: https://img.shields.io/github/actions/workflow/status/1kill2steal/leetcode-trees-rs/rust.yml?branch=main
+[Actions]: https://github.com/1kill2steal/leetcode-trees-rs/actions?query=branch%3Amaster
+[Latest Version]: https://img.shields.io/crates/v/leetcode-trees-rs.svg
+[crates.io]: https://crates.io/crates/leetcode-trees-rs
+
 This library is made to make any LeetCoders using Rust have a better experience
 at solving their LeetCode (LC) problems. It uses cargo make to have
 reproducible sub modules (check `leetcode-trees-rs/solutions/README.md`) as
