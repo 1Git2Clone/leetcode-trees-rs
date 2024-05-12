@@ -1,6 +1,6 @@
 [package]
 name = "leetcode-trees-rs"
-version = "0.1.14"
+version = "0.1.141"
 description = "A Rust library for Tree Node LeetCode problems."
 keywords = ["leetcode", "library"]
 homepage = "https://github.com/1kill2steal/leetcode-trees-rs"
