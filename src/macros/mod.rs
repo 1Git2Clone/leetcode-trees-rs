@@ -11,24 +11,27 @@
 /// This code:
 ///
 /// ```rust
-/// use crate::utils::list_node;
+/// use leetcode_trees_rs::utils::list_node;
+///
 /// let node = list_node!(1, 2, 3, 4);
 /// ```
 ///
 /// Is the equivalent of the following:
 ///
 /// ```rust
-/// use crate::utils::ListNode;
+/// use std::boxed::Box;
+/// use leetcode_trees_rs::utils::ListNode;
+///
 /// let node = ListNode {
 ///     val: 1,
-///     next: Some(Box(ListNode {
+///     next: Some(Box::new(ListNode {
 ///         val: 2,
-///         next: Some(Box(ListNode {
+///         next: Some(Box::new(ListNode {
 ///             val: 3,
-///             next: ListNode::new(4),
+///             next: Some(Box::new(ListNode::new(4))),
 ///         }))
 ///     }))
-/// }
+/// };
 /// ```
 #[macro_export]
 macro_rules! list_node {
@@ -98,87 +101,76 @@ macro_rules! tree {
 ///
 /// ## Example usage
 /// ```rust
-/// use crate::utils::symmetric_tree;
-/// symmetric_tree!(1, 2, 3, 4)
+/// use leetcode_trees_rs::utils::symmetric_tree;
+/// symmetric_tree!(1, 2, 3, 4);
 /// ```
 /// The symmetric_tree! macro invocation is desugared to this:
 /// ```rust
-/// use std::rc::Rc;
-/// use std::cell::RefCell;
+/// use std::{rc::Rc, cell::RefCell, boxed::Box};
 ///
-/// use crate::utils::TreeNode;
+/// use leetcode_trees_rs::utils::TreeNode;
 ///
 /// TreeNode {
 ///     val: 1,
-///     left: Some(Box::new(TreeNode {
+///     left: Some(Rc::new(RefCell::new(TreeNode{
 ///         val: 2,
-///         left: Some(Box::new(TreeNode {
+///         left: Some(Rc::new(RefCell::new(TreeNode{
 ///             val: 3,
-///             left: Some(Box::new(TreeNode {
+///             left: Some(Rc::new(RefCell::new(TreeNode{
 ///                 val: 4,
 ///                 left: None,
 ///                 right: None,
-///             }))
-///             right: Some(Box::new(TreeNode {
+///             }))),
+///             right: Some(Rc::new(RefCell::new(TreeNode{
 ///                 val: 4,
 ///                 left: None,
 ///                 right: None,
-///             }))
-///         }))
-///         right: Some(Box::new(TreeNode {
+///             }))),
+///         }))),
+///         right: Some(Rc::new(RefCell::new(TreeNode{
 ///             val: 3,
-///             left: Some(Box::new(TreeNode {
+///             left: Some(Rc::new(RefCell::new(TreeNode{
 ///                 val: 4,
 ///                 left: None,
 ///                 right: None,
-///             }))
-///             right: Some(Box::new(TreeNode {
+///             }))),
+///             right: Some(Rc::new(RefCell::new(TreeNode{
 ///                 val: 4,
 ///                 left: None,
 ///                 right: None,
-///             }))
-///         }))
-///     }))
-///     right: Some(Box::new(TreeNode {
+///             }))),
+///         }))),
+///     }))),
+///     right: Some(Rc::new(RefCell::new(TreeNode{
 ///         val: 2,
-///         left: Some(Box::new(TreeNode {
+///         left: Some(Rc::new(RefCell::new(TreeNode{
 ///             val: 3,
-///             left: Some(Box::new(TreeNode {
+///             left: Some(Rc::new(RefCell::new(TreeNode{
 ///                 val: 4,
 ///                 left: None,
 ///                 right: None,
-///             }))
-///             right: Some(Box::new(TreeNode {
+///             }))),
+///             right: Some(Rc::new(RefCell::new(TreeNode{
 ///                 val: 4,
 ///                 left: None,
 ///                 right: None,
-///             }))
-///         }))
-///         right: Some(Box::new(TreeNode {
+///             }))),
+///         }))),
+///         right: Some(Rc::new(RefCell::new(TreeNode{
 ///             val: 3,
-///             left: Some(Box::new(TreeNode {
+///             left: Some(Rc::new(RefCell::new(TreeNode{
 ///                 val: 4,
 ///                 left: None,
 ///                 right: None,
-///             }))
-///             right: Some(Box::new(TreeNode {
+///             }))),
+///             right: Some(Rc::new(RefCell::new(TreeNode{
 ///                 val: 4,
 ///                 left: None,
 ///                 right: None,
-///             }))
-///         }))
-///     }))
-/// }
-/// ```
-/// I bet you don't want to write that every time.
-/// You can have greater control with this too:
-/// ```rust
-/// use crate::utils::{symmetric_tree, TreeNode};
-/// TreeNode {
-///     val: 1,
-///     left: None,
-///     right: Some(Box::new(symmetric_tree!(2, 3, 4)))
-/// }
+///             }))),
+///         }))),
+///     }))),
+/// };
 /// ```
 /// Now you have a tree that branches all the way through the right side without having anything on
 /// the left.
@@ -220,7 +212,7 @@ macro_rules! symmetric_tree {
 /// This code:
 ///
 /// ```rust
-/// use crate::utils::left_tree;
+/// use leetcode_trees_rs::utils::left_tree;
 ///
 /// let left_only_tree = left_tree!(1, 2, 3);
 /// ```
@@ -229,7 +221,7 @@ macro_rules! symmetric_tree {
 ///
 /// ```rust
 /// use std::{rc::Rc, cell::RefCell};
-/// use crate::utils::TreeNode;
+/// use leetcode_trees_rs::utils::TreeNode;
 ///
 /// let left_only_tree = TreeNode {
 ///     val: 1,
@@ -239,9 +231,9 @@ macro_rules! symmetric_tree {
 ///             val: 3,
 ///             left: None,
 ///             right: None,
-///         })))
+///         }))),
 ///         right: None,
-///     })))
+///     }))),
 ///     right: None,
 /// };
 /// ```
@@ -250,9 +242,9 @@ macro_rules! left_tree {
     ($val:expr) => {
         $crate::utils::TreeNode::new($val)
     };
-    ($val:expr, $left:tt) => {{
+    ($val:expr, $($left:tt)*) => {{
         let mut node = $crate::utils::TreeNode::new($val);
-        node.left = Some(std::rc::Rc::new(std::cell::RefCell::new(left_tree!($left))));
+        node.left = Some(std::rc::Rc::new(std::cell::RefCell::new(left_tree!($($left)*))));
         node
     }};
 }
@@ -276,7 +268,7 @@ macro_rules! left_tree {
 /// This code:
 ///
 /// ```rust
-/// use crate::utils::right_tree;
+/// use leetcode_trees_rs::utils::right_tree;
 ///
 /// let right_only_tree = right_tree!(1, 2, 3);
 /// ```
@@ -285,7 +277,7 @@ macro_rules! left_tree {
 ///
 /// ```rust
 /// use std::{rc::Rc, cell::RefCell};
-/// use crate::utils::TreeNode;
+/// use leetcode_trees_rs::utils::TreeNode;
 ///
 /// let right_only_tree = TreeNode {
 ///     val: 1,
@@ -306,10 +298,10 @@ macro_rules! right_tree {
     ($val:expr) => {
         $crate::utils::TreeNode::new($val)
     };
-    ($val:expr, $right:tt) => {{
+    ($val:expr, $($right:tt)*) => {{
         let mut node = $crate::utils::TreeNode::new($val);
         node.right = Some(std::rc::Rc::new(std::cell::RefCell::new(right_tree!(
-            $right
+            $($right)*
         ))));
         node
     }};
