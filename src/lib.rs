@@ -43,9 +43,9 @@
 //! [`prelude`]: crate::prelude
 //! [`TreeNode`]: crate::utils::TreeNode
 
-pub use crate::prelude::*;
-
 pub mod error;
 pub mod prelude;
 pub mod tests;
 pub mod utils;
+
+pub use crate::prelude::*;
