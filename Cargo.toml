@@ -14,12 +14,8 @@ include = ["src/**/*", "LICENSE.md", "README.md"]
 members = ["solutions/*"]
 
 [dependencies]
-thiserror = "1.0.58"
 serde = { version = "1.0.197", features = ["derive"], optional = true }
 cargo-make = "0.37.10"
-
-[dev-dependencies]
-anyhow = "1.0.81"
 
 [features]
 serde = ["dep:serde"]
