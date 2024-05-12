@@ -162,13 +162,13 @@ use std::{cell::RefCell, rc::Rc};
 ///  None    None           None    None
 /// ```
 ///
-/// NOTE:
-/// If root->right.val != root->left.val then the tree wouldn't be balanced
-/// The same is the case if root->left->left.val != root->right->right.val.
+/// NOTE: If root->right.val != root->left.val then the tree wouldn't be balanced. The same is the
+/// case if root->left->left.val != root->right->right.val.
 ///
 /// ## Big O
 ///
 /// Traversal (postorder, preorder and inorder) -> O(n)
+///
 /// Insertion at the start (above the old root) -> O(1)
 ///
 /// Any other insertion:

@@ -95,6 +95,7 @@ macro_rules! tree {
 /// Arm 1:
 /// - Takes the value as an argument.
 /// - Equivalent of doing `TreeNode::new()`.
+///
 /// Arm 2:
 /// - Takes the value as an argument.
 /// - Also takes a sequence of left and right node values at the same time (which means they're
@@ -174,8 +175,6 @@ macro_rules! tree {
 /// };
 /// assert_eq!(node, symmetric_tree!(1, 2, 3, 4));
 /// ```
-/// Now you have a tree that branches all the way through the right side without having anything on
-/// the left.
 #[macro_export]
 macro_rules! symmetric_tree {
     ($val:expr) => {
@@ -204,6 +203,7 @@ macro_rules! symmetric_tree {
 /// Arm 1:
 /// - Takes the value as an argument.
 /// - Equivalent of doing `TreeNode::new()`.
+///
 /// Arm 2:
 /// - Takes the value as an argument.
 /// - Also takes a sequence of left only node values as an argument (and builds the `TreeNode`
@@ -261,6 +261,7 @@ macro_rules! left_tree {
 /// Arm 1:
 /// - Takes the value as an argument.
 /// - Equivalent of doing `TreeNode::new()`.
+///
 /// Arm 2:
 /// - Takes the value as an argument.
 /// - Also takes a sequence of right only node values as an argument (and builds the `TreeNode`

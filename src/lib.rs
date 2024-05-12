@@ -26,6 +26,8 @@
 //! The usage is very simple. These are the primary components:
 //! - [`prelude`]
 //! - [`utils::TreeNode`]
+//! - [`utils::ListNode`]
+//! - [`utils::symmetric_tree`]
 //!
 //!
 //! Additionally, via the support of the cargo make library you can comfortably run your LeetCode

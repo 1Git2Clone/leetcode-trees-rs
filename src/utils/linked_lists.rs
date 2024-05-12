@@ -36,11 +36,17 @@ use serde::{Deserialize, Serialize};
 /// ## Big O
 ///
 /// Peeking/modifying the first element -> O(1)
+///
 /// Peeking/modifying the last element -> O(n)
+///
 /// Removing the first element -> O(1)
+///
 /// Removing any next element -> O(n)
+///
 /// Adding a new element at the end -> O(n)
+///
 /// Adding a new element at the start -> O(1)
+///
 /// Searching -> O(n)
 #[derive(PartialEq, Eq, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
