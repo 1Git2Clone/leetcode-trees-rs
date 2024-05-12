@@ -1,6 +1,6 @@
 [package]
 name = "leetcode-trees-rs"
-version = "0.1.132"
+version = "0.1.14"
 description = "A Rust library for Tree Node LeetCode problems."
 keywords = ["leetcode", "library"]
 homepage = "https://github.com/1kill2steal/leetcode-trees-rs"
@@ -14,8 +14,8 @@ include = ["src/**/*", "LICENSE.md", "README.md"]
 members = ["solutions/*"]
 
 [dependencies]
-serde = { version = "1.0.197", features = ["derive"], optional = true }
-cargo-make = "0.37.10"
+serde = { version = "1.0.201", features = ["derive"], optional = true }
+cargo-make = "0.37.12"
 
 [features]
 serde = ["dep:serde"]
