@@ -41,7 +41,7 @@ use std::{cell::RefCell, rc::Rc};
 ///
 /// **NOTE:** Simplified `Option<Rc<RefCell<TreeNode>>>` to `Option<TreeNode.val>`.
 ///
-/// /// Example 2 - unbalanced tree:
+/// Example 2 - unbalanced tree:
 ///
 /// ```rust
 /// use std::{cell::RefCell, rc::Rc};
@@ -162,8 +162,9 @@ use std::{cell::RefCell, rc::Rc};
 ///  None    None           None    None
 /// ```
 ///
-/// NOTE: If root->right.val != root->left.val then the tree wouldn't be balanced. The same is the
-/// case if root->left->left.val != root->right->right.val.
+/// If root->right.val != root->left.val then the tree wouldn't be balanced.
+///
+/// The same is the case if root->left->left.val != root->right->right.val.
 ///
 /// ## Big O
 ///
