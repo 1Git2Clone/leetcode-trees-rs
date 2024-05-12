@@ -25,5 +25,11 @@ fn main() -> Result<()> {
 }
 ```
 
+Additional features:
+
+- Singly Linked Lists (example Leet - [add two numbers](https://leetcode.com/problems/add-two-numbers/description/))
+
+- Macros (for Trees and Linked Lists)
+
 Additional code templating can be found in [This template file](https://github.com/1Kill2Steal/leetcode-trees-rs/blob/main/solutions/lc0_general_nodes_template/src/main.rs).
 It's located at: `solutions/lc0_general_nodes_template/src/main.rs`
