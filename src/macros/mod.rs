@@ -1,5 +1,4 @@
 /// Iternal macro helper functions.
-#[cfg(feature = "tree_macros_internals")]
 #[doc(hidden)]
 pub mod helper_functions;
 
