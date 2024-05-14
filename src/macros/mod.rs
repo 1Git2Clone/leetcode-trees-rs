@@ -121,7 +121,7 @@ macro_rules! list_node {
 /// let tree = tree!(
 ///     &[
 ///         vec![Some(100)],
-///         vec![Some(21), None], // ! You need to have that trialing None !
+///         vec![Some(21), None], // ! You need to have that trialing `None` !
 ///         vec![Some(11)],       // Otherwise this `11` will get written to root->right rather
 ///                               // than of root->left->left.
 ///     ]
@@ -348,14 +348,14 @@ macro_rules! tree {
 /// assert_eq!(node, symmetric_tree!(1, 2, 3, 4));
 /// ```
 ///
-/// Another way of desugaring this symmetric tree is with the tree!() macro like so:
+/// Another way of desugaring this symmetric tree is with the `tree!()` macro like so:
 ///
 /// ```rust
 /// use std::{rc::Rc, cell::RefCell};
 /// use leetcode_trees_rs::utils::{symmetric_tree, tree};
 /// assert_eq!(
 ///     tree!(
-///         &mut [
+///         &[
 ///             vec![Some(1)],
 ///             vec![Some(2), Some(2)],
 ///             vec![Some(3), Some(3), Some(3), Some(3)],
