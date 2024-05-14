@@ -18,4 +18,8 @@ serde = { version = "1.0.201", features = ["derive"], optional = true }
 cargo-make = "0.37.12"
 
 [features]
+# Internal
+tree_macros_internals = []
+
+# Other libraries
 serde = ["dep:serde"]

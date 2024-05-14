@@ -1,3 +1,8 @@
+/// Iternal macro helper functions.
+#[cfg(feature = "tree_macros_internals")]
+#[doc(hidden)]
+pub mod helper_functions;
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // List Node macros
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5,6 +10,17 @@
 /// ## Description
 ///
 /// A macro to reduce the boilerplate in generating a full ListNode.
+///
+/// ## Match arms
+///
+/// Arm 1:
+/// - Takes the value as an argument.
+/// - Equivalent of doing `ListNode::new()`.
+///
+/// Arm 2:
+/// - Takes the value as an argument.
+/// - Also takes a sequence of left and right node values at the same time (which means they're
+/// symmetric) as an argument (and builds the `ListNode` struct with them).
 ///
 /// ## Example
 ///
@@ -52,38 +68,194 @@ macro_rules! list_node {
 // Tree Node macros
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// TODO:
-/// You can generate TreeNodes manually by utilizing tuples. The first value is a single value and
-/// everything else is a tuple of `(Option<i32>, Option<i32>)`
-// #[macro_export]
-#[allow(unused_macros)]
+/// ## Description
+///
+/// You can generate TreeNodes manually by utilizing a `[Vec<Option<i32>]` data structure.
+///
+/// **IMPORTANT:** Whenever you have more Nodes and there's a None node above - It's up to you to
+/// make sure that the nodes are matched correctly. Whenever there's a `None` value at a level
+/// that's not the last one then the next level will ignore every impossible value. This means that
+/// if you want this tree:
+///
+/// ```markdown
+///        Some(100)                     // Root Node
+///      /           \
+///    None        Some(21)              // Left and Right nodes respectively
+///                 /    \
+///               None  None
+/// ```
+///
+/// You need to call the macro like this:
+///
+/// ```rust
+/// use std::{rc::Rc, cell::RefCell};
+/// use leetcode_trees_rs::utils::{tree, TreeNode};
+///
+/// let tree = tree!(
+///     &[
+///         vec![Some(100)],
+///         vec![None, Some(21)],
+///         vec![Some(11), None], // **DON'T** use 4 `Option` values! The first two are inferred!
+///     ]
+/// );
+///
+/// assert_eq!(
+///     tree,
+///     Some(Rc::new(RefCell::new(TreeNode {
+///         val: 100,
+///         left: None,
+///         right: Some(Rc::new(RefCell::new(TreeNode {
+///             val: 21,
+///             left: Some(Rc::new(RefCell::new(TreeNode::new(11)))),
+///             right: None
+///         })))
+///     })))
+/// );
+/// ```
+///
+/// Another important note: If the `None` value is a the end of a vec like this:
+///
+/// ```rust
+/// use std::{rc::Rc, cell::RefCell};
+/// use leetcode_trees_rs::utils::{tree, TreeNode};
+///
+/// let tree = tree!(
+///     &[
+///         vec![Some(100)],
+///         vec![Some(21), None], // ! You need to have that trialing None !
+///         vec![Some(11)],       // Otherwise this `11` will get written to root->right rather
+///                               // than of root->left->left.
+///     ]
+/// );
+///
+/// assert_eq!(
+///     tree,
+///     Some(Rc::new(RefCell::new(TreeNode {
+///         val: 100,
+///         left: Some(Rc::new(RefCell::new(TreeNode {
+///             val: 21,
+///             left: Some(Rc::new(RefCell::new(TreeNode::new(11)))),
+///             right: None
+///         }))),
+///         right: None
+///     })))
+/// );
+/// ```
+///
+/// ## Match arms
+///
+/// Arm 1:
+/// - Takes the `[Vec<Option<i32>>]` data type which contains the `TreeNode` values based on the
+/// description for this macro.
+///
+///
+/// ## Additional examples
+///
+/// Making a tree only towards the left side:
+///
+/// ```rust
+/// use std::{cell::RefCell, rc::Rc};
+/// use leetcode_trees_rs::utils::{tree, symmetric_tree, TreeNode};
+///
+/// let node_left_sided = TreeNode {
+///     val: 1,
+///     left: Some(Rc::new(RefCell::new(TreeNode {
+///         val: 2,
+///         left: Some(Rc::new(RefCell::new(TreeNode::new(5)))),
+///         right: Some(Rc::new(RefCell::new(TreeNode::new(6)))),
+///     }))),
+///     right: None,
+/// };
+/// assert_eq!(
+///     Rc::new(RefCell::new(node_left_sided)),
+///     tree!(
+///         &[
+///             vec![Some(1)],
+///             vec![Some(2), None], // (!) You need to specify any trailing `None` values.
+///             vec![Some(5), Some(6), /* None, None */],
+///         ]
+///     ).expect("Failed to generate TreeNode from [Vec<i32>]")
+/// );
+/// ```
+///
+/// Making a tree only towards the right side:
+///
+/// ```rust
+/// use std::{cell::RefCell, rc::Rc};
+/// use leetcode_trees_rs::utils::{tree, symmetric_tree, TreeNode};
+///
+/// let node_right_sided = TreeNode {
+///     val: 1,
+///     left: None,
+///     right: Some(Rc::new(RefCell::new(TreeNode {
+///         val: 3,
+///         left: Some(Rc::new(RefCell::new(TreeNode::new(7)))),
+///         right: Some(Rc::new(RefCell::new(TreeNode::new(8)))),
+///     }))),
+/// };
+/// assert_eq!(
+///     Rc::new(RefCell::new(node_right_sided)),
+///     tree!(
+///         &[
+///             vec![Some(1)],
+///             vec![None, Some(3)],
+///             // The other `None` values are inferred from their parents.
+///             //
+///             // **IMPORTANT:** Don't add them in because it causes errors!
+///             vec![/*None, None, */ Some(7), Some(8)],
+///         ]
+///     ).expect("Failed to generate TreeNode from [Vec<i32>]")
+/// );
+/// ```
+///
+/// Utilizig both sides in making a tree:
+///
+/// ```rust
+/// use std::{cell::RefCell, rc::Rc};
+/// use leetcode_trees_rs::utils::{tree, symmetric_tree, TreeNode};
+///
+/// let node_both_sided = TreeNode {
+///     val: 1,
+///     left: Some(Rc::new(RefCell::new(TreeNode {
+///         val: 2,
+///         left: Some(Rc::new(RefCell::new(TreeNode::new(5)))),
+///         right: Some(Rc::new(RefCell::new(TreeNode::new(6)))),
+///     }))),
+///     right: Some(Rc::new(RefCell::new(TreeNode {
+///         val: 3,
+///         left: Some(Rc::new(RefCell::new(TreeNode::new(7)))),
+///         right: Some(Rc::new(RefCell::new(TreeNode::new(8)))),
+///     }))),
+/// };
+/// assert_eq!(
+///     Rc::new(RefCell::new(node_both_sided)),
+///     tree!(
+///         &[
+///             vec![Some(1)],
+///             vec![Some(2), Some(3)],
+///             vec![Some(5), Some(6), Some(7), Some(8)],
+///         ]
+///     ).expect("Failed to generate TreeNode from [Vec<i32>]")
+/// );
+/// ```
+///
+/// ## Performance
+///
+/// The way this is implemented is with depth traversal (similiar to [Breath-First
+/// Search](https://en.wikipedia.org/wiki/Breadth-first_search)) so the algorithm's performance is:
+///
+/// Worst-case time complexity: O(|V| + |E|) = O(b<sup>d</sup>)
+///
+/// Worst-case space complexity: O(|V|) = O(b<sup>d</sup>)
+///
+/// Where:
+///
+/// V = Verticies and E = Edges
+#[macro_export]
 macro_rules! tree {
-    ($val:expr) => {
-        $crate::utils::TreeNode::new($val)
-    };
-    ($($left:tt, $right:tt)*) => {
-        $(
-            if let Some(left) = $left {
-                $node.left = Some(std::rc::Rc::new(std::cell::RefCell::new(tree!(
-                    left
-                ))));
-            }
-            if let Some(right) = $right {
-                $node.right = Some(std::rc::Rc::new(std::cell::RefCell::new(tree!(
-                    right
-                ))));
-            }
-        )*
-    };
-    ($val:expr, $($left:expr, $right:expr)*) => {
-        {
-            let mut node = $crate::utils::TreeNode::new($val);
-            $(
-                tree!(node, ($left, $right));
-            )*
-            node
-        }
-    };
+    ($items:expr) => {{
+        $crate::macros::helper_functions::_build_tree($items)
+    }};
 }
 
 /// ## Description
@@ -102,6 +274,7 @@ macro_rules! tree {
 /// symmetric) as an argument (and builds the `TreeNode` struct with them).
 ///
 /// ## Example usage
+///
 /// ```rust
 /// use leetcode_trees_rs::utils::symmetric_tree;
 /// symmetric_tree!(1, 2, 3, 4);
@@ -174,6 +347,23 @@ macro_rules! tree {
 ///     }))),
 /// };
 /// assert_eq!(node, symmetric_tree!(1, 2, 3, 4));
+/// ```
+///
+/// Another way of desugaring this symmetric tree is with the tree!() macro like so:
+///
+/// ```rust
+/// use std::{rc::Rc, cell::RefCell};
+/// use leetcode_trees_rs::utils::{symmetric_tree, tree};
+/// assert_eq!(
+///     tree!(
+///         &mut [
+///             vec![Some(1)],
+///             vec![Some(2), Some(2)],
+///             vec![Some(3), Some(3), Some(3), Some(3)],
+///             vec![Some(4), Some(4), Some(4), Some(4), Some(4), Some(4), Some(4), Some(4)],
+///         ]
+///     ).unwrap(),
+///     Rc::new(RefCell::new(symmetric_tree!(1, 2, 3, 4))));
 /// ```
 #[macro_export]
 macro_rules! symmetric_tree {

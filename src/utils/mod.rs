@@ -22,4 +22,4 @@ pub use crate::list_node;
 /// A re-export for the symmetric_tree!, right_tree! and left_tree! macros.
 /// All of the TreeNode macros can be used to also just generate a new `TreeNode` instance without
 /// expanding on it.
-pub use crate::{left_tree, right_tree, symmetric_tree};
+pub use crate::{left_tree, right_tree, symmetric_tree, tree};
