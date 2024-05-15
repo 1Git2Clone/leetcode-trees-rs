@@ -259,6 +259,29 @@ macro_rules! tree {
 
 /// ## Description
 ///
+/// A macro that's used to make a new `TreeNode` element.
+///
+/// ## Match arms
+///
+/// Arm 1:
+/// - Takes an `i32` data type and makes a new `TreeNode` element out of it.
+///
+/// ## Example
+///
+/// ```rust
+/// use leetcode_trees_rs::utils::{tree_node, TreeNode};
+///
+/// assert_eq!(tree_node!(5), TreeNode::new(5));
+/// ```
+#[macro_export]
+macro_rules! tree_node {
+    ($val:expr) => {{
+        $crate::utils::TreeNode::new($val)
+    }};
+}
+
+/// ## Description
+///
 /// A macro to reduce the boilerplate in generating symmetric binary trees.
 ///
 /// ## Match arms
