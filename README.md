@@ -1,11 +1,15 @@
 # LeetCode Trees in Rust
 
-[![Build Status]][Actions]&emsp;[![Latest Version]][crates.io]
+[![Build Icon]][Build Status]&emsp;[![Docs Icon]][Docs]&emsp;[![Version Icon]][Crate]&emsp;[![License Icon]][LICENSE]
 
-[Build Status]: https://img.shields.io/github/actions/workflow/status/1kill2steal/leetcode-trees-rs/rust.yml?branch=main
-[Actions]: https://github.com/1kill2steal/leetcode-trees-rs/actions?query=branch%3Amaster
-[Latest Version]: https://img.shields.io/crates/v/leetcode-trees-rs.svg
-[crates.io]: https://crates.io/crates/leetcode-trees-rs
+[Build Icon]: https://img.shields.io/github/actions/workflow/status/1kill2steal/leetcode-trees-rs/rust.yml?branch=main
+[Build Status]: https://github.com/1kill2steal/leetcode-trees-rs/actions?query=branch%3Amaster
+[Docs Icon]: https://docs.rs/leetcode-trees-rs/badge.svg
+[Docs]: https://docs.rs/leetcode-trees-rs/latest/leetcode_trees_rs/
+[Version Icon]: https://img.shields.io/crates/v/leetcode-trees-rs.svg
+[Crate]: https://crates.io/crates/leetcode-trees-rs
+[License Icon]: https://img.shields.io/badge/license-MIT-blue.svg
+[LICENSE]: LICENSE
 
 ## Description
 
