@@ -1,6 +1,6 @@
 # LeetCode Trees in Rust
 
-[![Build Icon]][Build Status]&emsp;[![Docs Icon]][Docs]&emsp;[![Version Icon]][Crate]&emsp;[![License Icon]][LICENSE]&emsp;[Coverage]
+[![Build Icon]][Build Status]&emsp;[![Docs Icon]][Docs]&emsp;[![Version Icon]][Crate]&emsp;[![License Icon]][LICENSE]&emsp;[![Coverage Icon]][Coverage]
 
 [Build Icon]: https://gitlab.com/1k2s/leetcode-trees-rs/badges/main/pipeline.svg
 [Build Status]: https://gitlab.com/1k2s/leetcode-trees-rs/-/pipelines
@@ -10,6 +10,7 @@
 [Crate]: https://crates.io/crates/leetcode-trees-rs
 [License Icon]: https://img.shields.io/badge/license-MIT-blue.svg
 [LICENSE]: LICENSE
+[Coverage Icon]: https://gitlab.com/1k2s/leetcode-trees-rs/badges/main/coverage.svg
 [Coverage]: https://gitlab.com/1k2s/leetcode-trees-rs/badges/main/coverage.svg?job=coverage
 
 ## Description
