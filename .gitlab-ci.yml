@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+
+variables:
+  CARGO_TERM_COLOR: "always"
+
+build:
+  stage: build
+  image: rust:latest
+  before_script:
+    - rustup component add clippy
+    - rustup component add rustfmt
+  script:
+    - cargo check -p lc0_general_nodes_template
+    - cargo check -p lc100_is_same_tree
+    - cargo check -p lc103_binary_tree_zigzag_level_order_traversal
+    - cargo build --verbose
+
+test:
+  stage: test
+  image: rust:latest
+  script:
+    - cargo test --verbose
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request" && $CI_COMMIT_BRANCH == "main"'
