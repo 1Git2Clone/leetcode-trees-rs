@@ -1,7 +1,9 @@
 # LeetCode Trees in Rust
 
-[![Build Icon]][Build Status]&emsp;[![Docs Icon]][Docs]&emsp;[![Version Icon]][Crate]&emsp;[![License Icon]][LICENSE]&emsp;[![Coverage Icon]][Coverage]
+[![GH_Build Icon]][GH_Build Status]&emsp;[![Build Icon]][Build Status]&emsp;[![Docs Icon]][Docs]&emsp;[![Version Icon]][Crate]&emsp;[![License Icon]][LICENSE]&emsp;[![Coverage Icon]][Coverage]
 
+[GH_Build Icon]: https://img.shields.io/github/actions/workflow/status/1git2clone/leetcode-trees-rs/rust.yml?branch=main
+[GH_Build Status]: https://github.com/1git2clone/leetcode-trees-rs/actions?query=branch%3Amaster
 [Build Icon]: https://gitlab.com/1k2s/leetcode-trees-rs/badges/main/pipeline.svg
 [Build Status]: https://gitlab.com/1k2s/leetcode-trees-rs/-/pipelines
 [Docs Icon]: https://docs.rs/leetcode-trees-rs/badge.svg
